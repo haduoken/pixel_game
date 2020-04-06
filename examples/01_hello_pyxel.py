@@ -13,7 +13,7 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
-        # 颜色变化的字体
+        # 颜色变化的字体, 这个里面最多16色
         pyxel.text(55, 41, "Hello, Pyxel!", pyxel.frame_count % 16)
         pyxel.blt(61, 66, 0, 0, 0, 38, 16)
 
