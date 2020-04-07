@@ -6,11 +6,11 @@ class App:
         pyxel.init(160, 120, caption="Hello Pyxel")
         pyxel.image(0).load(0, 0, "assets/pyxel_logo_38x16.png")
         pyxel.run(self.update, self.draw)
-
+    
     def update(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
-
+    
     def draw(self):
         pyxel.cls(0)
         # 颜色变化的字体, 这个里面最多16色
