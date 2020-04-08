@@ -8,13 +8,19 @@ class Player:
         self.animation_type = 'stand'
         self.player_animation = {}
         self.name = name
+        self.last_direction = ''
         # 1pix/s
-        self.speed = 3
+        self.speed = 30
         pass
     
     def move(self, direction):
-        dt = 1.0 / 30
+        dt = 1.0 / pyxel.DEFAULT_FPS
         speed_x, speed_y = 0, 0
+        should_format_number = False
+        if direction != self.last_direction:
+            should_format_number = True
+            self.last_direction = direction
+        
         if direction == 'up':
             speed_y = -self.speed
         elif direction == 'down':
@@ -25,22 +31,24 @@ class Player:
             speed_x = self.speed
         
         elif direction == 'left-up':
-            speed_x = -self.speed * sqrt(2) / 2.0
-            speed_y = -self.speed * sqrt(2) / 2.0
-        
+            speed_x = -self.speed * 0.707
+            speed_y = -self.speed * 0.707
         elif direction == 'right-up':
-            speed_x = self.speed * sqrt(2) / 2.0
-            speed_y = -self.speed * sqrt(2) / 2.0
+            speed_x = self.speed * 0.707
+            speed_y = -self.speed * 0.707
         elif direction == 'left-down':
-            speed_x = -self.speed * sqrt(2) / 2.0
-            speed_y = self.speed * sqrt(2) / 2.0
+            speed_x = -self.speed * 0.707
+            speed_y = self.speed * 0.707
         elif direction == 'right-down':
-            speed_x = self.speed * sqrt(2) / 2.0
-            speed_y = self.speed * sqrt(2) / 2.0
+            speed_x = self.speed * 0.707
+            speed_y = self.speed * 0.707
         
         self.position[0] += (speed_x * dt)
         self.position[1] += (speed_y * dt)
-        # print(self.name, 'speed: ', speed_x, speed_y, ' position: ', self.position)
+        if should_format_number:
+            self.position[0] = int(self.position[0])
+            self.position[1] = int(self.position[1])
+        print(self.name, 'speed: ', speed_x, speed_y, ' position: ', self.position)
     
     def act(self, type):
         
